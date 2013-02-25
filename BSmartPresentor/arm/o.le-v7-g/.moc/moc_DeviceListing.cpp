@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'ConnectionManager.hpp'
+** Meta object code from reading C++ file 'DeviceListing.hpp'
 **
-** Created: Thu Feb 21 02:07:28 2013
+** Created: Sat Feb 23 16:16:21 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../src/ConnectionManager.hpp"
+#include "../../../src/DeviceListing.hpp"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'ConnectionManager.hpp' doesn't include <QObject>."
+#error "The header file 'DeviceListing.hpp' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
 #error "This file was generated using the moc from 4.8.4. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,75 +17,89 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_ConnectionManager[] = {
+static const uint qt_meta_data_DeviceListing[] = {
 
  // content:
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
-       1,   14, // properties
+       2,   14, // methods
+       1,   24, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: signature, parameters, type, tag, flags
+      15,   14,   14,   14, 0x0a,
+      24,   14,   14,   14, 0x0a,
+
  // properties: name, type, flags
-      35,   18, 0x00095409,
+      60,   35, 0x00095409,
 
        0        // eod
 };
 
-static const char qt_meta_stringdata_ConnectionManager[] = {
-    "ConnectionManager\0LocalDeviceInfo*\0"
-    "localDevInfo\0"
+static const char qt_meta_stringdata_DeviceListing[] = {
+    "DeviceListing\0\0update()\0discover()\0"
+    "bb::cascades::DataModel*\0model\0"
 };
 
-void ConnectionManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void DeviceListing::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        DeviceListing *_t = static_cast<DeviceListing *>(_o);
+        switch (_id) {
+        case 0: _t->update(); break;
+        case 1: _t->discover(); break;
+        default: ;
+        }
+    }
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData ConnectionManager::staticMetaObjectExtraData = {
+const QMetaObjectExtraData DeviceListing::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject ConnectionManager::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_ConnectionManager,
-      qt_meta_data_ConnectionManager, &staticMetaObjectExtraData }
+const QMetaObject DeviceListing::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_DeviceListing,
+      qt_meta_data_DeviceListing, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &ConnectionManager::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &DeviceListing::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *ConnectionManager::metaObject() const
+const QMetaObject *DeviceListing::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *ConnectionManager::qt_metacast(const char *_clname)
+void *DeviceListing::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_ConnectionManager))
-        return static_cast<void*>(const_cast< ConnectionManager*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_DeviceListing))
+        return static_cast<void*>(const_cast< DeviceListing*>(this));
     return QObject::qt_metacast(_clname);
 }
 
-int ConnectionManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int DeviceListing::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
-    
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    }
 #ifndef QT_NO_PROPERTIES
-     if (_c == QMetaObject::ReadProperty) {
+      else if (_c == QMetaObject::ReadProperty) {
         void *_v = _a[0];
         switch (_id) {
-        case 0: *reinterpret_cast< LocalDeviceInfo**>(_v) = localDevInfo(); break;
+        case 0: *reinterpret_cast< bb::cascades::DataModel**>(_v) = model(); break;
         }
         _id -= 1;
     } else if (_c == QMetaObject::WriteProperty) {

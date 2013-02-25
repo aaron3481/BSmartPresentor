@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ConnectionManager.hpp'
 **
-** Created: Sat Feb 23 16:16:54 2013
+** Created: Sun Feb 24 17:21:16 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,16 +23,17 @@ static const uint qt_meta_data_IncomeDataThread[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
       38,   18,   17,   17, 0x05,
       88,   64,   17,   17, 0x05,
+     111,   17,   17,   17, 0x05,
 
        0        // eod
 };
@@ -41,6 +42,7 @@ static const char qt_meta_stringdata_IncomeDataThread[] = {
     "IncomeDataThread\0\0slideCount,fileName\0"
     "recordHeader(int,QString)\0"
     "slideNum,animCount,note\0slide(int,int,QString)\0"
+    "received()\0"
 };
 
 void IncomeDataThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -51,6 +53,7 @@ void IncomeDataThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         switch (_id) {
         case 0: _t->recordHeader((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
         case 1: _t->slide((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
+        case 2: _t->received(); break;
         default: ;
         }
     }
@@ -88,9 +91,9 @@ int IncomeDataThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
@@ -108,14 +111,20 @@ void IncomeDataThread::slide(int _t1, int _t2, const QString _t3)
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
+
+// SIGNAL 2
+void IncomeDataThread::received()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, 0);
+}
 static const uint qt_meta_data_ConnectionManager[] = {
 
  // content:
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
-       3,   34, // properties
+      10,   14, // methods
+       6,   64, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
@@ -128,11 +137,20 @@ static const uint qt_meta_data_ConnectionManager[] = {
       78,   19,   18,   18, 0x0a,
      139,  119,   18,   18, 0x0a,
      189,  165,   18,   18, 0x0a,
+     217,  212,   18,   18, 0x0a,
+     250,  242,   18,   18, 0x0a,
+     271,   18,   18,   18, 0x0a,
+     290,   18,  282,   18, 0x0a,
+     309,  304,   18,   18, 0x0a,
+     339,  333,   18,   18, 0x0a,
 
  // properties: name, type, flags
-     229,  212, 0x00095409,
-     257,  242, 0x00095409,
-     279,  271, 0x00095409,
+     377,  360, 0x00095409,
+     405,  390, 0x00095409,
+     427,  419, 0x00095409,
+     459,  434, 0x00095409,
+     467,  282, 0x0a095401,
+     482,  282, 0x0a095401,
 
        0        // eod
 };
@@ -143,9 +161,13 @@ static const char qt_meta_stringdata_ConnectionManager[] = {
     "handleBTDeviceEvent(int,QString,QString)\0"
     "slideCount,fileName\0recordHeader(int,QString)\0"
     "slideNum,animCount,note\0slide(int,int,QString)\0"
-    "LocalDeviceInfo*\0localDevInfo\0"
-    "DeviceListing*\0deviceListing\0Record*\0"
-    "record\0"
+    "addr\0connectToServer(QString)\0command\0"
+    "sendCommand(QString)\0received()\0QString\0"
+    "getFileName()\0page\0gotoPageUpdate(QString)\0"
+    "click\0clickUpdate(QString)\0LocalDeviceInfo*\0"
+    "localDevInfo\0DeviceListing*\0deviceListing\0"
+    "Record*\0record\0bb::cascades::DataModel*\0"
+    "s_model\0s_currentSlide\0s_currentNote\0"
 };
 
 void ConnectionManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -158,6 +180,13 @@ void ConnectionManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 1: _t->handleBTDeviceEvent((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
         case 2: _t->recordHeader((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
         case 3: _t->slide((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
+        case 4: _t->connectToServer((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->sendCommand((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 6: _t->received(); break;
+        case 7: { QString _r = _t->getFileName();
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 8: _t->gotoPageUpdate((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 9: _t->clickUpdate((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -195,9 +224,9 @@ int ConnectionManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 10;
     }
 #ifndef QT_NO_PROPERTIES
       else if (_c == QMetaObject::ReadProperty) {
@@ -206,22 +235,25 @@ int ConnectionManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 0: *reinterpret_cast< LocalDeviceInfo**>(_v) = localDevInfo(); break;
         case 1: *reinterpret_cast< DeviceListing**>(_v) = deviceListing(); break;
         case 2: *reinterpret_cast< Record**>(_v) = record(); break;
+        case 3: *reinterpret_cast< bb::cascades::DataModel**>(_v) = model(); break;
+        case 4: *reinterpret_cast< QString*>(_v) = getSCurrentSlide(); break;
+        case 5: *reinterpret_cast< QString*>(_v) = getSCurrentNote(); break;
         }
-        _id -= 3;
+        _id -= 6;
     } else if (_c == QMetaObject::WriteProperty) {
-        _id -= 3;
+        _id -= 6;
     } else if (_c == QMetaObject::ResetProperty) {
-        _id -= 3;
+        _id -= 6;
     } else if (_c == QMetaObject::QueryPropertyDesignable) {
-        _id -= 3;
+        _id -= 6;
     } else if (_c == QMetaObject::QueryPropertyScriptable) {
-        _id -= 3;
+        _id -= 6;
     } else if (_c == QMetaObject::QueryPropertyStored) {
-        _id -= 3;
+        _id -= 6;
     } else if (_c == QMetaObject::QueryPropertyEditable) {
-        _id -= 3;
+        _id -= 6;
     } else if (_c == QMetaObject::QueryPropertyUser) {
-        _id -= 3;
+        _id -= 6;
     }
 #endif // QT_NO_PROPERTIES
     return _id;

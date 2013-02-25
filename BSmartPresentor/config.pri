@@ -10,12 +10,16 @@ SOURCES +=  \
     $$BASEDIR/src/BSmartPresentor.cpp \
     $$BASEDIR/src/ConnectionManager.cpp \
     $$BASEDIR/src/LocalDeviceInfo.cpp \
+    $$BASEDIR/src/DeviceListing.cpp \
+    $$BASEDIR/src/Record.cpp \
     $$BASEDIR/src/main.cpp
 
 HEADERS +=  \
     $$BASEDIR/src/BSmartPresentor.hpp \
     $$BASEDIR/src/ConnectionManager.hpp \
-    $$BASEDIR/src/LocalDeviceInfo.hpp
+    $$BASEDIR/src/LocalDeviceInfo.hpp\
+    $$BASEDIR/src/DeviceListing.hpp \
+    $$BASEDIR/src/Record.hpp 
 
 CONFIG += precompile_header
 PRECOMPILED_HEADER = $$BASEDIR/precompiled.h

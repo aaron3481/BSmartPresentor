@@ -1,16 +1,8 @@
 APP_NAME = BSmartPresentor
 
-CONFIG += qt warn_on debug_and_release cascades
+CONFIG += qt warn_on cascades10
 
 QT += declarative
-
-simulator {
-    CONFIG(release, debug|release) {
-        DESTDIR = o
-    }
-    CONFIG(debug, debug|release) {
-        DESTDIR = o-g
-    }
-}
+LIBS += -lbtapi -lbbsystem
 
 include(config.pri)
