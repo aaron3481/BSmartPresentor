@@ -6,6 +6,7 @@
 #include <btapi/btspp.h>
 #include <errno.h>
 #include <iostream>
+#include <fstream>
 
 #define SERVER_UUID "00001101-CADF-FFDC-194D-CCAB3816FFBE"
 
@@ -21,7 +22,8 @@ ConnectionManager::ConnectionManager(QObject *parent) :
 		QObject(parent), m_localDevInfo(new LocalDeviceInfo(this)), m_deviceListing(
 				new DeviceListing(this)), s_model(
 				new bb::cascades::GroupDataModel(
-						QStringList() << "slideNum" << "slideType", this)) {
+						QStringList() << "slideNum" << "slideType" << "image",
+						this)) {
 	s_cm = this;
 	connect(this, SIGNAL(BTDeviceSignal(int, QString, QString)), this,
 			SLOT(handleBTDeviceEvent(int, QString, QString)));
@@ -109,10 +111,22 @@ void ConnectionManager::received() {
 	/*std::cout << "Done" << std::endl;
 	 m_record->printRecord();*/
 	s_model->clear();
-	for (int i = 1; i <= m_record->getSlideCount(); i++) {
+	QString last(".png");
+	QDir dir;
+	QString userDir = dir.currentPath();
+	dir.mkpath("data/image/tempData");
+	for (int i = m_record->getSlideCount(); i >= 1; i--) {
 		QVariantMap map;
 		map["slideNum"] = i;
 		map["slideType"] = tr("Please Select a Slide");
+		QString no;
+		no.setNum(i);
+		//std::cout<<(first+no+last).toStdString()<<std::endl;
+		//map["image"] = (first+no+last);
+		map["image"] = "file:///" + userDir + "/data/image/tempData/s" + no
+				+ last;
+		//map["image"] =
+		//		"file:///accounts/1000/appdata/com.example.BSmartPresentor.testDev_rtPresentora30c4706/data/image/tempData/s1.png";
 		s_model->insert(map);
 	}
 
@@ -136,7 +150,7 @@ void ConnectionManager::clickUpdate(QString click) {
 			&& num == 1) {
 	} else {
 		clicked += num;
-		std::cout << clicked << std::endl;
+		//std::cout << clicked << std::endl;
 		if (clicked == animCount) {
 			//switch to next page
 			if (currentSlide + 1 <= m_record->getSlideCount()) {
@@ -213,13 +227,13 @@ void IncomeDataThread::close() {
 
 void IncomeDataThread::run() {
 	//Receiving Record data from the server.
-	std::cout << "IDT_RUN" << std::endl;
+	//std::cout << "IDT_RUN" << std::endl;
 	char buff[2048];
 	while (fd >= 0) {
 		int temp1, readLen;
 		read(fd, &temp1, 4);
 		//memcpy(&temp1,buff,4);
-		std::cout << temp1 << std::endl;
+		//std::cout << temp1 << std::endl;
 		char fn[temp1 + 1];
 		read(fd, fn, temp1);
 		fn[temp1] = '\0';
@@ -254,6 +268,81 @@ void IncomeDataThread::run() {
 		}
 
 		emit received();
+
+		QDir dir;
+		dir.rmpath("data/image/tempData");
+		dir.mkpath("data/image/tempData");
+		//dir.mkpath("app/native/assets/images/temp");
+		//dir.mkpath("images/tempData");
+		QString first("data/image/tempData/s");
+		//QString first("app/native/assets/images/temp/s");
+		QString last(".png");
+
+		for (int i = 0; i < slideCount; i++) {
+			int fileLen;
+			read(fd, &fileLen, 4);
+			std::cout << fileLen << std::endl;
+			char bufk[fileLen];
+			int remain = fileLen;
+			int offset = 0;
+			while (remain) {
+				if (remain < 2048)
+					readLen = read(fd, buff, remain);
+				else
+					readLen = read(fd, buff, 2048);
+				memcpy(bufk + offset, buff, readLen);
+				offset += readLen;
+				remain -= readLen;
+			}
+			QByteArray ba(bufk, fileLen);
+			QImage file = QImage::fromData(ba, "PNG");
+			QString no;
+			no.setNum(i + 1);
+			file.save(first + no + last, "PNG");
+			//ba.clear();
+		}
+
+		/*long fileLen;
+		 read(fd, &fileLen, 8);
+		 std::cout << fileLen << std::endl;
+		 char bufk[(int) fileLen];
+		 int remain = (int) fileLen;
+		 int offset = 0;
+		 int count = 0;
+		 while (remain) {
+		 if (remain < 2048)
+		 readLen = read(fd, buff, remain);
+		 else
+		 readLen = read(fd, buff, 2048);
+		 memcpy(bufk + offset, buff, readLen);
+		 offset += readLen;
+		 count += readLen;
+		 remain -= readLen;
+		 }*/
+		//std::cout << count << std::endl;
+		//QDir dir;
+		//std::cout<<dir.currentPath().toStdString()<<std::endl;
+		//dir.mkpath("data/image/tempData");
+		/*QFile textfile("data/files/text/newfile.txt");
+		 textfile.open(QIODevice::WriteOnly | QIODevice::Text);
+		 QTextStream out(&textfile);
+		 out << "This is a text file\n";
+		 textfile.close();*/
+
+		//QFile file("data/image/tempData/s2.png");
+		//QByteArray ba(bufk, (int) fileLen);
+		//QImage file = QImage::fromData(ba, "PNG");
+		//file.save("data/image/tempData/s2.png", "PNG");
+		//file.open(QIODevice::WriteOnly);
+		//QDataStream out(&file);
+		//out.writeBytes(bufk,(int)fileLen);
+		//out<<bufk;
+		//file.save(QIODevice::WriteOnly,"PNG");
+		/*ofstream outfile;
+		 outfile.open("data/images/tempData/s1.png");
+		 outfile.write(bufk,(int)fileLen);
+		 outfile.close();*/
+
 		/////////Read PNG file
 		//Not yet implement.*/
 	}

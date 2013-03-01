@@ -3,17 +3,31 @@ import bb.cascades 1.0
 Page {
     id: switchSlide
     Container {
+        preferredWidth: 250
+        preferredHeight: 168
+        /*ImageView {
+         * imageSource: "asset:///images/white_photo.png"
+         * preferredWidth: 768
+         * preferredHeight: 173
+         * }*/
+        
         ListView {
             dataModel: _cm.s_model
             listItemComponents: [
                 ListItemComponent {
                     type: "listItem"
-                    StandardListItem {
+                    /*StandardListItem {
                         title: ListItemData.slideNum
+                        imageSource: ListItemData.image
+                        imageSpaceReserved: true
                         //description: ListItemData.deviceAddress
                         //status: ListItemData.deviceClass
-                    }
+                        
+                    }*/
+                    RecipeItem {
+                        }
                 }
+                
             ]
             onTriggered: {
                 var selectedItem = dataModel.data(indexPath);
@@ -28,6 +42,7 @@ Page {
                  * _cm.connectToServer()
                  * navigationPane.push(remoteDevicePage.createObject())*/
             }
+            
             function itemType(data, indexPath) {
                 if (indexPath.length == 1) {
                     // If the index path contains a single integer, the item
@@ -40,5 +55,6 @@ Page {
                 }
             }
         }
+        
     }
 }

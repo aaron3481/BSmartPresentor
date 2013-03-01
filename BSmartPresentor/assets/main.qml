@@ -34,6 +34,7 @@ NavigationPane {
                         StandardListItem {
                             title: ListItemData.deviceName
                             description: ListItemData.deviceAddress
+                            //image: "images/picture1.png"
                             status: ListItemData.deviceClass
                         }
                     }
