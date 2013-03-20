@@ -282,9 +282,15 @@ void IncomeDataThread::run() {
 			int fileLen;
 			read(fd, &fileLen, 4);
 			std::cout << fileLen << std::endl;
-			char bufk[fileLen];
+			//char bufk[fileLen];
+			char *bufk = (char*)malloc(fileLen);
 			int remain = fileLen;
 			int offset = 0;
+
+			/*readLen = read(fd,bufk,fileLen);
+			std::cout<<readLen<<std::endl;
+			return;*/
+
 			while (remain) {
 				if (remain < 2048)
 					readLen = read(fd, buff, remain);
@@ -293,12 +299,16 @@ void IncomeDataThread::run() {
 				memcpy(bufk + offset, buff, readLen);
 				offset += readLen;
 				remain -= readLen;
+				std::cout<<remain<<std::endl;
+				//usleep(1);
 			}
 			QByteArray ba(bufk, fileLen);
 			QImage file = QImage::fromData(ba, "PNG");
 			QString no;
 			no.setNum(i + 1);
 			file.save(first + no + last, "PNG");
+			free(bufk);
+			//usleep(700000);
 			//ba.clear();
 		}
 
